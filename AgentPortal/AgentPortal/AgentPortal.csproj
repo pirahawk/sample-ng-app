@@ -7,7 +7,7 @@
   <ItemGroup>
     <Folder Include="Client\" />
     <Folder Include="Pages\" />
-    <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
 </Project>
