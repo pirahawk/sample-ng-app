@@ -10,4 +10,13 @@
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AgentPortal.Db\AgentPortal.Db.csproj" />
+    <ProjectReference Include="..\AgentPortal.Domain\AgentPortal.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
