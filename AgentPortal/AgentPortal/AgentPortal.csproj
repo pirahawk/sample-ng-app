@@ -6,8 +6,8 @@
 
   <ItemGroup>
     <Folder Include="Client\" />
-    <Folder Include="wwwroot\" />
     <Folder Include="Pages\" />
+    <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
 </Project>
