@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using AgentPortal.Configuration.Filters;
 using AgentPortal.Db;
 using AgentPortal.Domain.Configuration;
+using AgentPortal.Domain.Coordinators;
+using AgentPortal.Domain.Db;
 using AgentPortal.Domain.Store;
 using AgentPortal.ImageStore;
 using Microsoft.AspNetCore.Builder;
@@ -44,6 +46,9 @@ namespace AgentPortal
             });
 
             services.AddTransient<IImageStore, AzureBlobImageStore>();
+            services.AddTransient<IPortalDbContext, AgentPortalPortalDbContextAdapter>();
+
+            services.AddTransient<IGetAllListingsCoordinator, GetAllListingsCoordinator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

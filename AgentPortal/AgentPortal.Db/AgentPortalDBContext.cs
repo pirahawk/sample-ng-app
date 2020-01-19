@@ -1,4 +1,5 @@
-﻿using AgentPortal.Domain.Data;
+﻿using System.Linq;
+using AgentPortal.Domain.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgentPortal.Db
@@ -31,6 +32,11 @@ namespace AgentPortal.Db
                 .WithOne(li => li.Listing);
 
             modelBuilder.Entity<ListingImage>().HasKey(l => l.Id);
+        }
+
+        public IQueryable<TEntity> Get<TEntity>() where TEntity : class
+        {
+            return Set<TEntity>().AsQueryable();
         }
     }
 }
