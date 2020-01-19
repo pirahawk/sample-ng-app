@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using AgentPortal.Configuration.Filters;
 using AgentPortal.Db;
+using AgentPortal.Domain.Configuration;
+using AgentPortal.Domain.Store;
+using AgentPortal.ImageStore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,7 +31,10 @@ namespace AgentPortal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ImageBlobStoreConfiguration>(Configuration.GetSection("ImageBlobStoreConfiguration"));
+
             services.AddTransient<IStartupFilter, DbContextConfigurationStartupFilter>();
+            services.AddTransient<IStartupFilter, ImageStoreStartupFilter>();
 
             services.AddRazorPages();
             services.AddControllers();
@@ -36,6 +42,8 @@ namespace AgentPortal
             {
                 options.UseInMemoryDatabase("AgentPortalDb");
             });
+
+            services.AddTransient<IImageStore, AzureBlobImageStore>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

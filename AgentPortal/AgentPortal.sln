@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentPortal", "AgentPortal\AgentPortal.csproj", "{396CA0F3-BB72-4A88-91DC-D0AE8B72C402}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgentPortal", "AgentPortal\AgentPortal.csproj", "{396CA0F3-BB72-4A88-91DC-D0AE8B72C402}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentPortal.Domain", "AgentPortal.Domain\AgentPortal.Domain.csproj", "{8F7FF4AA-D5A8-4C78-96AE-E6BBB1AF7777}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgentPortal.Domain", "AgentPortal.Domain\AgentPortal.Domain.csproj", "{8F7FF4AA-D5A8-4C78-96AE-E6BBB1AF7777}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentPortal.Db", "AgentPortal.Db\AgentPortal.Db.csproj", "{00101BC3-ED69-4EEF-BA52-366013F6D8F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgentPortal.Db", "AgentPortal.Db\AgentPortal.Db.csproj", "{00101BC3-ED69-4EEF-BA52-366013F6D8F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentPortal.ImageStore", "AgentPortal.ImageStore\AgentPortal.ImageStore.csproj", "{E80AECCB-E1A2-4A44-ADE5-36A4A9E69909}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{00101BC3-ED69-4EEF-BA52-366013F6D8F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00101BC3-ED69-4EEF-BA52-366013F6D8F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00101BC3-ED69-4EEF-BA52-366013F6D8F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E80AECCB-E1A2-4A44-ADE5-36A4A9E69909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E80AECCB-E1A2-4A44-ADE5-36A4A9E69909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E80AECCB-E1A2-4A44-ADE5-36A4A9E69909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E80AECCB-E1A2-4A44-ADE5-36A4A9E69909}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

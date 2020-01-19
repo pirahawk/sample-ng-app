@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="11.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AgentPortal.Domain\AgentPortal.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

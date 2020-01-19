@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace AgentPortal.Domain.Data
 {
@@ -13,5 +12,6 @@ namespace AgentPortal.Domain.Data
         public string Description { get; set; }
         public decimal AskingPrice { get; set; }
         public bool Expired { get; set; }
+        public IEnumerable<ListingImage> Images { get; set; }
     }
 }

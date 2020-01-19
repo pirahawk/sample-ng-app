@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AgentPortal.Db\AgentPortal.Db.csproj" />
     <ProjectReference Include="..\AgentPortal.Domain\AgentPortal.Domain.csproj" />
+    <ProjectReference Include="..\AgentPortal.ImageStore\AgentPortal.ImageStore.csproj" />
   </ItemGroup>
 
 </Project>
