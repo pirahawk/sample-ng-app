@@ -1,10 +1,22 @@
 app-listings{
     .listing{
+        min-height: 40px;
         margin: 10px;
+        padding:5px;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        background-color: $aero-blue;
 
+        &:nth-of-type(2n){
+            background-color: $magic-mint;
+        }
+
+        &:hover{
+            background-color: $dark-salmon;
+            opacity: 0.7;
+            cursor:grab;
+        }
         // span {
         //     & + span{
         //         margin-left: 2px;

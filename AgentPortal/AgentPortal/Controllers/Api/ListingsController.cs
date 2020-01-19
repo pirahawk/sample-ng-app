@@ -1,12 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using AgentPortal.Domain.Coordinators;
+﻿using AgentPortal.Domain.Coordinators;
 using AgentPortal.Domain.Data;
-using AgentPortal.Domain.Db;
 using AgentPortal.Domain.Http;
 using AgentPortal.Domain.Values;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AgentPortal.Controllers.Api
 {
@@ -17,7 +16,8 @@ namespace AgentPortal.Controllers.Api
         private readonly IGetAllListingsCoordinator _getListingsCoordinator;
         private readonly IFindListingCoordinator _findListingCoordinator;
 
-        public ListingsController(IGetAllListingsCoordinator getListingsCoordinator, IFindListingCoordinator findListingCoordinator)
+        public ListingsController(IGetAllListingsCoordinator getListingsCoordinator,
+            IFindListingCoordinator findListingCoordinator)
         {
             _getListingsCoordinator = getListingsCoordinator;
             _findListingCoordinator = findListingCoordinator;
@@ -33,7 +33,8 @@ namespace AgentPortal.Controllers.Api
 
         [Route("{listingId:guid}")]
         [HttpGet]
-        public async Task<IActionResult> GetListing(Guid listingId) { 
+        public async Task<IActionResult> GetListing(Guid listingId)
+        {
             var result = await _findListingCoordinator.Find(listingId);
             if (result == null)
             {
@@ -49,7 +50,16 @@ namespace AgentPortal.Controllers.Api
         {
             Link[] links =
             {
-                new Link {Relation = LinkRelValueObject.SELF, Href = Url.Action(nameof(GetListing), new { listingId = listing.Id})}
+                new Link
+                {
+                    Relation = LinkRelValueObject.SELF,
+                    Href = Url.Action(nameof(GetListing), new {listingId = listing.Id})
+                },
+                new Link
+                {
+                    Relation = LinkRelValueObject.IMAGES,
+                    Href = Url.Action("GetImages", "Images", new {listingId = listing.Id})
+                }
             };
 
             return new ListingResponse()

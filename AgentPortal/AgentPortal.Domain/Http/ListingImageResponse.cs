@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace AgentPortal.Domain.Data
+namespace AgentPortal.Domain.Http
 {
-    public class ListingImage
+    public class ListingImageResponse
     {
         public Guid Id { get; set; }
         public Guid ListingId { get; set; }
-        public Listing Listing { get; set; }
         public string Url { get; set; }
+        public Link[] Links { get; set; }
     }
 }

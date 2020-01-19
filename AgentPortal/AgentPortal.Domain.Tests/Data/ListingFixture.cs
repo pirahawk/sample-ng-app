@@ -18,7 +18,7 @@ namespace AgentPortal.Domain.Tests.Data
 
         public ListingFixture()
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Description = "One Hyde Park, 100";
             Address = "100 Knightsbridge, London";
             AskingPrice = 200000000m;

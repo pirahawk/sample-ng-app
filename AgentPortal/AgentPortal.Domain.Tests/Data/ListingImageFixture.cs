@@ -5,7 +5,6 @@ namespace AgentPortal.Domain.Tests.Data
 {
     public class ListingImageFixture
     {
-        public string ContentMd5Hash { get; set; }
         public string Url { get; set; }
         public Guid ListingId { get; set; }
         public Guid Id { get; set; }
@@ -13,11 +12,22 @@ namespace AgentPortal.Domain.Tests.Data
 
         public ListingImageFixture()
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Listing = new ListingFixture().Build();
             ListingId = Listing.Id;
             Url = "http://test.com";
-            ContentMd5Hash = "123";
+        }
+
+        public ListingImageFixture ForListing(Listing listing)
+        {
+            if (listing == null)
+            {
+                return this;
+            }
+
+            ListingId = listing.Id;
+            Listing = listing;
+            return this;
         }
 
         public ListingImage Build()
@@ -28,7 +38,6 @@ namespace AgentPortal.Domain.Tests.Data
                 ListingId = ListingId,
                 Listing = Listing,
                 Url = Url,
-                ContentMd5Hash = ContentMd5Hash
             };
             return img;
         }

@@ -25,32 +25,73 @@ namespace AgentPortal.Configuration.Filters
 
         private void SeedTestData(AgentPortalDBContext dbContext)
         {
-            dbContext.Listings.Add(new Listing
+            var listing1 = new Listing
             {
                 Description = "One Hyde Park, 100",
                 Address = "100 Knightsbridge, London",
                 AskingPrice = 200000000m,
                 NumberBedrooms = 10,
-                PostCode = "SW1X 7LJ"
-            });
-
-            dbContext.Listings.Add(new Listing
+                PostCode = "SW1X 7LJ",
+            };
+            
+            var listing2 = new Listing
             {
                 Description = "72 Vincent Square",
                 Address = "Westminster, London",
                 AskingPrice = 100000000m,
                 NumberBedrooms = 8,
-                PostCode = "SW1P 2PA"
-            });
+                PostCode = "SW1P 2PA",
+            };
 
-            dbContext.Listings.Add(new Listing
+            var listing3 = new Listing
             {
                 Description = "Belgravia Gate",
                 Address = "Belgravia, London",
                 AskingPrice = 100000000m,
                 NumberBedrooms = 5,
                 PostCode = "SW1X 7EE"
-            });
+            };
+
+            var listing4 = new Listing
+            {
+                Description = "Ashurst Road",
+                Address = "Ashurst Road, London",
+                AskingPrice = 100000000m,
+                NumberBedrooms = 5,
+                PostCode = "N12 9AH"
+            };
+
+            dbContext.Listings.Add(listing1);
+            dbContext.Listings.Add(listing2);
+            dbContext.Listings.Add(listing3);
+            dbContext.Listings.Add(listing4);
+
+            dbContext.SaveChanges();
+
+            var listingImage1 = new ListingImage
+            {
+                ListingId = listing1.Id,
+                Listing = listing1,
+                Url = "https://zooplapirantassessment.blob.core.windows.net/stock-images/1.jpg"
+            };
+
+            var listingImage2 = new ListingImage
+            {
+                ListingId = listing2.Id,
+                Listing = listing2,
+                Url = "https://zooplapirantassessment.blob.core.windows.net/stock-images/2.jpg"
+            };
+
+            var listingImage3 = new ListingImage
+            {
+                ListingId = listing3.Id,
+                Listing = listing3,
+                Url = "https://zooplapirantassessment.blob.core.windows.net/stock-images/3.jpg"
+            };
+
+            dbContext.Images.Add(listingImage1);
+            dbContext.Images.Add(listingImage2);
+            dbContext.Images.Add(listingImage3);
 
             dbContext.SaveChanges();
         }

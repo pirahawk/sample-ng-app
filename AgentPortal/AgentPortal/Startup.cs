@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Threading.Tasks;
 using AgentPortal.Configuration.Filters;
 using AgentPortal.Db;
 using AgentPortal.Domain.Configuration;
@@ -12,13 +7,11 @@ using AgentPortal.Domain.Store;
 using AgentPortal.ImageStore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace AgentPortal
 {
@@ -51,6 +44,7 @@ namespace AgentPortal
 
             services.AddTransient<IGetAllListingsCoordinator, GetAllListingsCoordinator>();
             services.AddTransient<IFindListingCoordinator, FindListingCoordinator>();
+            services.AddTransient<IGetAllImagesCoordinator, GetAllImagesCoordinator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
