@@ -10,6 +10,7 @@
         <span>{{ listing.postCode }}</span>
         <span>{{ listing.numberBedrooms }}</span>
         <span>{{ listing.askingPrice }}</span>
+        <app-listing-image-preview [imageHref]="getImageHref(listing)"></app-listing-image-preview>
     </section>
 </div>
 

@@ -24,4 +24,16 @@ export class ListingsComponent implements OnInit {
     );
   }
 
+  public getImageHref(response: ListingResponse):string{
+    if(!response.links || !response.links.length){
+      return null;
+    }
+
+    for(let link of response.links){
+        if(link.relation === "IMAGES"){
+            return link.href;
+        }
+    }
+  }
+
 }

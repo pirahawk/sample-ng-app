@@ -8,12 +8,15 @@ import { AppcommonModule } from './appcommon/appcommon.module';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ListingsComponent } from './components/listings/listings.component';
 import { GetListingsService } from './services/get-listings.service';
+import { ListingImagePreviewComponent } from './components/listing-image-preview/listing-image-preview.component';
+import { GetListingImageService } from './services/get-listing-image.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     ListingsComponent,
+    ListingImagePreviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,7 +25,8 @@ import { GetListingsService } from './services/get-listings.service';
     HttpClientModule
   ],
   providers: [
-    GetListingsService
+    GetListingsService,
+    GetListingImageService
   ],
   bootstrap: [AppComponent, NavigationComponent]
 })
