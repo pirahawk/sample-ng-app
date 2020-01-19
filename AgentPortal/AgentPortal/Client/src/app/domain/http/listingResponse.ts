@@ -7,6 +7,6 @@ export class ListingResponse{
     public address:string;
     public description: string;
     public askingPrice:string;
-    public expired:string;
+    public expired:boolean;
     public links:Link[];
 }

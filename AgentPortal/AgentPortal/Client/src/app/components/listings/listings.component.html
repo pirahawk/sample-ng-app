@@ -5,8 +5,11 @@
 <p *ngIf="!isRetrievingListings && !listings">No property listings available.</p>
 
 <div *ngIf="!isRetrievingListings && listings">
-    <section *ngFor="let listing of listings">
+    <section class="listing" *ngFor="let listing of listings">
         <span>{{ listing.description }}</span>
+        <span>{{ listing.postCode }}</span>
+        <span>{{ listing.numberBedrooms }}</span>
+        <span>{{ listing.askingPrice }}</span>
     </section>
 </div>
 

@@ -1,0 +1,14 @@
+app-listings{
+    .listing{
+        margin: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        // span {
+        //     & + span{
+        //         margin-left: 2px;
+        //     }
+        // }
+    }
+}
