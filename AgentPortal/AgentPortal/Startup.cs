@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using AgentPortal.Configuration.Filters;
 using AgentPortal.Db;
@@ -69,6 +70,13 @@ namespace AgentPortal
             {
                 endpoints.MapControllers();
                 endpoints.MapRazorPages();
+
+                //endpoints.MapHealthChecks("/health");
+                endpoints.Map("/{wild:regex(^(?!(api|js)).*$)}/{*url}", async httpContext =>
+                {
+                    await Task.CompletedTask;
+                    httpContext.Response.Redirect("/");
+                });
             });
         }
     }
