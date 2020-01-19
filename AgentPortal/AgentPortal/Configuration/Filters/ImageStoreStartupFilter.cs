@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AgentPortal.Domain.Store;
 using AgentPortal.Domain.Values;
 using Microsoft.AspNetCore.Builder;
@@ -13,17 +14,17 @@ namespace AgentPortal.Configuration.Filters
         {
             return builder =>
             {
-                CreateRootImageStorageContainer(builder);
+                Task.WaitAll(CreateRootImageStorageContainer(builder));
                 next(builder);
             };
         }
 
-        private void CreateRootImageStorageContainer(IApplicationBuilder builder)
+        private async Task CreateRootImageStorageContainer(IApplicationBuilder builder)
         {
             using (var serviceScope = builder.ApplicationServices.CreateScope())
             {
                 var imageStore = serviceScope.ServiceProvider.GetService<IImageStore>();
-                imageStore.TryCreateContainer(ImageStoreValueObject.BLOB_IMAGE_CONTAINER_NAME);
+                var created = await imageStore.TryCreateContainer(ImageStoreValueObject.BLOB_IMAGE_CONTAINER_NAME);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading.Tasks;
 using AgentPortal.Domain.Configuration;
 using AgentPortal.Domain.Store;
@@ -16,9 +17,17 @@ namespace AgentPortal.ImageStore
 
         public AzureBlobImageStore(IOptionsMonitor<ImageBlobStoreConfiguration> blobStorageOptionsAccessor)
         {
-            if (blobStorageOptionsAccessor.CurrentValue == null) throw new ArgumentNullException(nameof(blobStorageOptionsAccessor));
+            var imageBlobStoreConfiguration = blobStorageOptionsAccessor.CurrentValue;
+            var connectionString = !string.IsNullOrWhiteSpace(imageBlobStoreConfiguration.ConnectionString)
+                ? imageBlobStoreConfiguration.ConnectionString
+                : Encoding.UTF8.GetString(Convert.FromBase64String(imageBlobStoreConfiguration.Fallback));
 
-            _storageAccountProvider = new Lazy<CloudStorageAccount>(() => TryCreateStorageAccount(blobStorageOptionsAccessor.CurrentValue.ConnectionString));
+            if (imageBlobStoreConfiguration == null) throw new ArgumentNullException(nameof(blobStorageOptionsAccessor));
+
+            _storageAccountProvider = new Lazy<CloudStorageAccount>(() =>
+            {
+                return TryCreateStorageAccount(connectionString);
+            });
         }
 
         private CloudStorageAccount TryCreateStorageAccount(string connectionString)
