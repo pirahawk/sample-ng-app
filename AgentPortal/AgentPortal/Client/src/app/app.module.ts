@@ -1,24 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppcommonModule } from './appcommon/appcommon.module';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ListingsComponent } from './components/listings/listings.component';
+import { GetListingsService } from './services/get-listings.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    ListingsComponent
+    ListingsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AppcommonModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    GetListingsService
+  ],
   bootstrap: [AppComponent, NavigationComponent]
 })
 export class AppModule { }
