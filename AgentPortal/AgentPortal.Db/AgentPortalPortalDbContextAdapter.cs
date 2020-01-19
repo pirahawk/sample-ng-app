@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using AgentPortal.Domain.Db;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,6 @@ namespace AgentPortal.Db
             _portalDbContext = portalDbContext;
         }
 
-
         public IQueryable<TEntity> Query<TEntity>(params string[] includes) where TEntity : class
         {
             var queryable = _portalDbContext.Get<TEntity>();
@@ -27,6 +27,11 @@ namespace AgentPortal.Db
             }
 
             return queryable;
+        }
+
+        public async Task<TEntity> Find<TEntity>(params object[] keyValues) where TEntity : class
+        {
+            return await _portalDbContext.FindAsync<TEntity>(keyValues);
         }
     }
 }

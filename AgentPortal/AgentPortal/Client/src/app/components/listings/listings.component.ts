@@ -4,8 +4,7 @@ import { ListingResponse } from 'src/app/domain/http/listingResponse';
 
 @Component({
   selector: 'app-listings',
-  templateUrl: './listings.component.html',
-  styleUrls: ['./listings.component.scss']
+  templateUrl: './listings.component.html'
 })
 export class ListingsComponent implements OnInit {
 

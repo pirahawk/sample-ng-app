@@ -15,10 +15,12 @@ namespace AgentPortal.Controllers.Api
     public class ListingsController : ControllerBase
     {
         private readonly IGetAllListingsCoordinator _getListingsCoordinator;
+        private readonly IFindListingCoordinator _findListingCoordinator;
 
-        public ListingsController(IGetAllListingsCoordinator getListingsCoordinator)
+        public ListingsController(IGetAllListingsCoordinator getListingsCoordinator, IFindListingCoordinator findListingCoordinator)
         {
             _getListingsCoordinator = getListingsCoordinator;
+            _findListingCoordinator = findListingCoordinator;
         }
 
         [HttpGet]
@@ -31,9 +33,16 @@ namespace AgentPortal.Controllers.Api
 
         [Route("{listingId:guid}")]
         [HttpGet]
-        public IActionResult GetListing(Guid listingId)
-        {
-            return Ok();
+        public async Task<IActionResult> GetListing(Guid listingId) { 
+            var result = await _findListingCoordinator.Find(listingId);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            var response = MapListingResponse(result);
+
+            return Ok(response);
         }
 
         private ListingResponse MapListingResponse(Listing listing)

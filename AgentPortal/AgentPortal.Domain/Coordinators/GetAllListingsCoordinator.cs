@@ -1,7 +1,6 @@
 ﻿using AgentPortal.Domain.Data;
 using AgentPortal.Domain.Db;
 using System.Linq;
-using AgentPortal.Domain.Http;
 
 namespace AgentPortal.Domain.Coordinators
 {
@@ -16,10 +15,10 @@ namespace AgentPortal.Domain.Coordinators
 
         public IQueryable<Listing> GetAllListings()
         {
-            var allListings =  _dbContext.Query<Listing>();
+            var allListings =  _dbContext.Query<Listing>()
+                .Where(listing => !listing.Expired);
+
             return allListings;
         }
-
-        
      }
 }

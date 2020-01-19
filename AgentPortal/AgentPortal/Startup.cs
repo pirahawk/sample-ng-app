@@ -50,6 +50,7 @@ namespace AgentPortal
             services.AddTransient<IPortalDbContext, AgentPortalPortalDbContextAdapter>();
 
             services.AddTransient<IGetAllListingsCoordinator, GetAllListingsCoordinator>();
+            services.AddTransient<IFindListingCoordinator, FindListingCoordinator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
