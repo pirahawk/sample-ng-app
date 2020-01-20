@@ -5,6 +5,7 @@ import { GetListingImageService } from 'src/app/services/get-listing-image.servi
 import { ListingResponse } from 'src/app/domain/http/listingResponse';
 import { ListingImageResponse } from 'src/app/domain/http/listingImageResponse';
 import { HttpResponse } from '@angular/common/http';
+import { ResponseHelperService } from 'src/app/services/response-helper.service';
 
 @Component({
   selector: 'app-listing-preview',
@@ -20,7 +21,8 @@ export class ListingPreviewComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private getListings:GetListingsService,
-    private getListingImageService: GetListingImageService
+    private getListingImageService: GetListingImageService,
+    private responseHelper:ResponseHelperService,
     ) {
     
     const navigation:Navigation = this.router.getCurrentNavigation();
@@ -55,6 +57,15 @@ export class ListingPreviewComponent implements OnInit {
       (response:HttpResponse<any>) => this.router.navigate(["listings"]),
       (error:any)=>{}
     );
+  }
+
+  public editListing(event:any):void{
+    let stateArg:any = {
+      listingHref: this.responseHelper.getSelfHref(this.listing),
+      imageHref: this.responseHelper.getImageHref(this.listing)
+    };
+
+    this.router.navigate(["edit", this.listing.id], {state:stateArg});
   }
 
 }

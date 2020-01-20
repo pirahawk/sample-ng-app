@@ -11,6 +11,10 @@ const routes: Routes = [
     component: ListingPreviewComponent,
   },
   {
+    path: 'edit/:id',
+    component: ListingPreviewComponent,
+  },
+  {
     path: 'listings',
     component: ListingsComponent
   },
