@@ -10,6 +10,8 @@ import { ListingsComponent } from './components/listings/listings.component';
 import { GetListingsService } from './services/get-listings.service';
 import { ListingImagePreviewComponent } from './components/listing-image-preview/listing-image-preview.component';
 import { GetListingImageService } from './services/get-listing-image.service';
+import { ResponseHelperService } from './services/response-helper.service';
+import { ListingPreviewComponent } from './components/listing-preview/listing-preview.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import { GetListingImageService } from './services/get-listing-image.service';
     NavigationComponent,
     ListingsComponent,
     ListingImagePreviewComponent,
+    ListingPreviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { GetListingImageService } from './services/get-listing-image.service';
   ],
   providers: [
     GetListingsService,
-    GetListingImageService
+    GetListingImageService,
+    ResponseHelperService
   ],
   bootstrap: [AppComponent, NavigationComponent]
 })

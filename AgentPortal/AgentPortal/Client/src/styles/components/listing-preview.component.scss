@@ -1,0 +1,13 @@
+app-listing-preview{
+    .image-preview{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        img{
+            max-width: 250px;
+            margin: 3px;
+        }
+    }
+}

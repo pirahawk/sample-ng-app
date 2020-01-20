@@ -12,6 +12,10 @@ export class GetListingsService {
   public getAllListing():Observable<ListingResponse[]>{
     return this.httpClient.get<ListingResponse[]>("api/listings");
   }
+
+  public getListing(listingHref:string):Observable<ListingResponse>{
+    return this.httpClient.get<ListingResponse>(listingHref);
+  }
 }
 
 

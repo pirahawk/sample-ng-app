@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GetListingsService } from 'src/app/services/get-listings.service';
 import { ListingResponse } from 'src/app/domain/http/listingResponse';
+import { ResponseHelperService } from 'src/app/services/response-helper.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listings',
@@ -11,7 +13,9 @@ export class ListingsComponent implements OnInit {
   public listings:ListingResponse[];
   public isRetrievingListings: boolean;
 
-  constructor(private getListings:GetListingsService) { }
+  constructor(private getListings:GetListingsService, 
+    private responseHelper:ResponseHelperService,
+    private router: Router) { }
 
   ngOnInit() {
     this.isRetrievingListings = true;
@@ -25,15 +29,15 @@ export class ListingsComponent implements OnInit {
   }
 
   public getImageHref(response: ListingResponse):string{
-    if(!response.links || !response.links.length){
-      return null;
-    }
-
-    for(let link of response.links){
-        if(link.relation === "IMAGES"){
-            return link.href;
-        }
-    }
+    return this.responseHelper.getImageHref(response);
   }
 
+  public navigateListing(event:any, listing:ListingResponse):void{
+    let stateArg:any = {
+      listingHref: this.responseHelper.getSelfHref(listing),
+      imageHref: this.responseHelper.getImageHref(listing)
+    };
+
+    this.router.navigate(["listing", listing.id], {state:stateArg});
+  }
 }

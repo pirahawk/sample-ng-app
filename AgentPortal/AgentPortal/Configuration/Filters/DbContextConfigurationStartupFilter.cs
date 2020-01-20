@@ -92,8 +92,43 @@ namespace AgentPortal.Configuration.Filters
             dbContext.Images.Add(listingImage1);
             dbContext.Images.Add(listingImage2);
             dbContext.Images.Add(listingImage3);
-
             dbContext.SaveChanges();
+
+            BulkLoadData(dbContext, listingImage1);
+
+        }
+
+        private static void BulkLoadData(AgentPortalDBContext dbContext, ListingImage listingImage1)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                var listing = new Listing
+                {
+                    Description = $"Test Listing {i}",
+                    Address = "{1} Street, London",
+                    AskingPrice = i * 10000m,
+                    NumberBedrooms = i,
+                    PostCode = "SW1X 7EE"
+                };
+
+                dbContext.Listings.Add(listing);
+                dbContext.SaveChanges();
+
+                for (int j = 0; j < 10; j++)
+                {
+                    var listingImage = new ListingImage
+                    {
+                        ListingId = listing.Id,
+                        Listing = listing,
+                        Url = j % 2 == 0
+                            ? "https://zooplapirantassessment.blob.core.windows.net/stock-images/3.jpg"
+                            : "https://zooplapirantassessment.blob.core.windows.net/stock-images/3.jpg"
+                    };
+
+                    dbContext.Images.Add(listingImage);
+                    dbContext.SaveChanges();
+                }
+            }
         }
     }
 }

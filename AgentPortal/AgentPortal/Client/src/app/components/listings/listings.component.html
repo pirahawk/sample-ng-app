@@ -5,7 +5,7 @@
 <p *ngIf="!isRetrievingListings && !listings">No property listings available.</p>
 
 <div *ngIf="!isRetrievingListings && listings">
-    <section class="listing" *ngFor="let listing of listings">
+    <section class="listing" *ngFor="let listing of listings" (click)="navigateListing($event, listing)">
         <span>{{ listing.description }}</span>
         <span>{{ listing.postCode }}</span>
         <span>{{ listing.numberBedrooms }}</span>

@@ -1,0 +1,26 @@
+<ng-container *ngIf="listing">
+    <h1>{{ listing.description }}</h1>
+
+    <section>
+        <h2>Post-Code</h2>
+        <p>{{listing.postCode}}</p>
+    </section>
+
+    <section>
+        <h2>Number of Bedrooms</h2>
+        <p>{{listing.numberBedrooms}}</p>
+    </section>
+
+    <section>
+        <h2>Asking Price</h2>
+        <p>{{listing.askingPrice}}</p>
+    </section>
+
+    <ng-container *ngIf="images">
+        <div class="image-preview">
+            <img *ngFor="let image of images" [src]="image.url"/>
+        </div>
+    </ng-container>
+
+
+</ng-container>
