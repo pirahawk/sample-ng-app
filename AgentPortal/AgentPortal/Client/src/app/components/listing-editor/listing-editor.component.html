@@ -1,0 +1,61 @@
+<h1>Add Listing</h1>
+
+<fieldset>
+    <section>
+        <label for="descriptionControlInput">Description</label>
+        <input id="descriptionControlInput" type="text" [formControl]="descriptionControl" 
+        size="50" placeholder="description" />
+    </section>
+    <section *ngIf="descriptionControl.touched && descriptionControl.invalid">
+        <span>Please enter a description</span>
+    </section>
+</fieldset>
+
+<fieldset>
+    <section>
+        <label for="addressControlInput">Address</label>
+        <input id="addressControlInput" type="text" [formControl]="addressControl" 
+        size="50" placeholder="Address" />
+    </section>
+    <section class="validation" *ngIf="addressControl.touched && addressControl.invalid">
+        <span>Please enter an address</span>
+    </section>
+</fieldset>
+
+<fieldset>
+    <section>
+        <label for="postcodeControlInput">Post Code</label>
+        <input id="postcodeControlInput" type="text" [formControl]="postcodeControl" 
+        minlength="2" maxlength="8" size="8" placeholder="AA1 1AA" />
+    </section>
+    <section class="validation" *ngIf="postcodeControl.touched && postcodeControl.invalid">
+        <span>Please enter a valid Post code</span>
+    </section>
+</fieldset>
+
+<fieldset>
+    <section>
+        <label for="numberRoomsControlInput">Number of rooms</label>
+        <input id="numberRoomsControlInput" type="range" [formControl]="numberRoomsControl" 
+        min="1" max="300" step="1"/>
+        <span>{{numberRoomsControl.value || 0}}</span>
+    </section>
+    <section class="validation" *ngIf="numberRoomsControl.touched && numberRoomsControl.invalid">
+        <span>Number of rooms can be between 1-300</span>
+    </section>
+</fieldset>
+
+<fieldset>
+    <section>
+        <label for="askingPriceControlInput">Asking Price</label>
+        <input id="askingPriceControlInput" type="number" [formControl]="askingPriceControl" 
+        size="10"  step="1000" />
+    </section>
+    <section class="validation" *ngIf="askingPriceControl.touched && askingPriceControl.invalid">
+        <span>Please set a valid asking price in GBP</span>
+    </section>
+</fieldset>
+
+
+<button [disabled]="!canSubmit()">Submit</button>
+Component Test: {{testValid()}}

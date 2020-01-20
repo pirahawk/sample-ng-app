@@ -12,6 +12,8 @@ import { ListingImagePreviewComponent } from './components/listing-image-preview
 import { GetListingImageService } from './services/get-listing-image.service';
 import { ResponseHelperService } from './services/response-helper.service';
 import { ListingPreviewComponent } from './components/listing-preview/listing-preview.component';
+import { ListingEditorComponent } from './components/listing-editor/listing-editor.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,12 +22,15 @@ import { ListingPreviewComponent } from './components/listing-preview/listing-pr
     ListingsComponent,
     ListingImagePreviewComponent,
     ListingPreviewComponent,
+    ListingEditorComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AppcommonModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     GetListingsService,

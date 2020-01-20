@@ -22,8 +22,7 @@ export class ListingPreviewComponent implements OnInit {
     private router: Router,
     private getListings:GetListingsService,
     private getListingImageService: GetListingImageService,
-    private responseHelper:ResponseHelperService,
-    ) {
+    private responseHelper:ResponseHelperService) {
     
     const navigation:Navigation = this.router.getCurrentNavigation();
     const state:any = navigation.extras.state;

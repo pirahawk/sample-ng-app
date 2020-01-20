@@ -1,0 +1,28 @@
+app-listing-editor{
+    fieldset{
+        padding:0;
+        // height: 46px;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        &+fieldset{
+            margin-top: 20px;
+        }
+
+        section{
+            min-height:23px;
+            &:first-of-type{
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+    
+            label+input{
+                margin-left: 20px;
+            }
+        }
+    }
+}
