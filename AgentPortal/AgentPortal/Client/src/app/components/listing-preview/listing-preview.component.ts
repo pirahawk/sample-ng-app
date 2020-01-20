@@ -4,6 +4,7 @@ import { GetListingsService } from 'src/app/services/get-listings.service';
 import { GetListingImageService } from 'src/app/services/get-listing-image.service';
 import { ListingResponse } from 'src/app/domain/http/listingResponse';
 import { ListingImageResponse } from 'src/app/domain/http/listingImageResponse';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-listing-preview',
@@ -39,6 +40,19 @@ export class ListingPreviewComponent implements OnInit {
     this.getListingImageService.getAllListingImages(this.imageHref)
     .subscribe(
       (response:ListingImageResponse[]) => this.images = response,
+      (error:any)=>{}
+    );
+  }
+
+  public expireListing(event:any):void{
+    var updateRequest:any = {};
+    Object.assign(updateRequest, this.listing);
+
+    updateRequest.expired = true;
+
+    this.getListings.updateListing(this.listingHref, updateRequest)
+    .subscribe(
+      (response:HttpResponse<any>) => this.router.navigate(["listings"]),
       (error:any)=>{}
     );
   }

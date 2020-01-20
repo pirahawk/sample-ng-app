@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AgentPortal.Domain.Db;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace AgentPortal.Db
 {
@@ -32,6 +33,16 @@ namespace AgentPortal.Db
         public async Task<TEntity> Find<TEntity>(params object[] keyValues) where TEntity : class
         {
             return await _portalDbContext.FindAsync<TEntity>(keyValues);
+        }
+
+        public void Attach<TEntity>(TEntity entity)
+        {
+            EntityEntry result = _portalDbContext.Attach(entity);
+        }
+
+        public async Task<int> SaveChanges()
+        {
+            return await _portalDbContext.SaveChangesAsync();
         }
     }
 }

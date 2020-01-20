@@ -16,6 +16,10 @@ export class GetListingsService {
   public getListing(listingHref:string):Observable<ListingResponse>{
     return this.httpClient.get<ListingResponse>(listingHref);
   }
+
+  public updateListing(listingHref:string, update:any):Observable<HttpResponse<any>>{
+    return this.httpClient.put(listingHref, update, {observe: 'response'});
+  }
 }
 
 

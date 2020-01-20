@@ -45,6 +45,7 @@ namespace AgentPortal
             services.AddTransient<IGetAllListingsCoordinator, GetAllListingsCoordinator>();
             services.AddTransient<IFindListingCoordinator, FindListingCoordinator>();
             services.AddTransient<IGetAllImagesCoordinator, GetAllImagesCoordinator>();
+            services.AddTransient<IEditListingCoordinator, EditListingCoordinator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -15,12 +15,14 @@ namespace AgentPortal.Controllers.Api
     {
         private readonly IGetAllListingsCoordinator _getListingsCoordinator;
         private readonly IFindListingCoordinator _findListingCoordinator;
+        private readonly IEditListingCoordinator _editListingCoordinator;
 
         public ListingsController(IGetAllListingsCoordinator getListingsCoordinator,
-            IFindListingCoordinator findListingCoordinator)
+            IFindListingCoordinator findListingCoordinator, IEditListingCoordinator editListingCoordinator)
         {
             _getListingsCoordinator = getListingsCoordinator;
             _findListingCoordinator = findListingCoordinator;
+            _editListingCoordinator = editListingCoordinator;
         }
 
         [HttpGet]
@@ -44,6 +46,22 @@ namespace AgentPortal.Controllers.Api
             var response = MapListingResponse(result);
 
             return Ok(response);
+        }
+
+        [Route("{listingId:guid}")]
+        [HttpPut]
+        public async Task<IActionResult> EditListing(Guid listingId, EditListingRequest editListingRequest)
+        {
+            var existingListing = await _findListingCoordinator.Find(listingId);
+            
+            if (existingListing == null)
+            {
+                return NotFound();
+            }
+
+            _editListingCoordinator.Edit(listingId, existingListing, editListingRequest);
+
+            return NoContent();
         }
 
         private ListingResponse MapListingResponse(Listing listing)

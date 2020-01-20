@@ -100,12 +100,12 @@ namespace AgentPortal.Configuration.Filters
 
         private static void BulkLoadData(AgentPortalDBContext dbContext, ListingImage listingImage1)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 var listing = new Listing
                 {
                     Description = $"Test Listing {i}",
-                    Address = "{1} Street, London",
+                    Address = $"{i} Downing Street, London",
                     AskingPrice = i * 10000m,
                     NumberBedrooms = i,
                     PostCode = "SW1X 7EE"
