@@ -17,16 +17,11 @@ export class GetListingsService {
     return this.httpClient.get<ListingResponse>(listingHref);
   }
 
+  public addListing(newListing:any):Observable<HttpResponse<any>>{
+    return this.httpClient.post("api/listings", newListing, {observe: 'response'});
+  }
+
   public updateListing(listingHref:string, update:any):Observable<HttpResponse<any>>{
     return this.httpClient.put(listingHref, update, {observe: 'response'});
   }
 }
-
-
-// this.httpClient.get("/health", {responseType: 'text', observe: 'response'})
-    // .subscribe((response: any)=>{
-    //   let responseTest = response;
-    // },
-    // (error:HttpErrorResponse)=>{
-    //   let errorTest = error;
-    // });

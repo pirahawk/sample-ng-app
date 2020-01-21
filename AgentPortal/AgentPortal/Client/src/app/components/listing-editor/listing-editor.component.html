@@ -57,5 +57,4 @@
 </fieldset>
 
 
-<button [disabled]="!canSubmit()">Submit</button>
-Component Test: {{testValid()}}
+<button [disabled]="!canSubmit()" (click)="submitListing($event)">Submit</button>
