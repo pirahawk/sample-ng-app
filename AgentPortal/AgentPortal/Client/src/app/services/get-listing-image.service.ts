@@ -13,4 +13,8 @@ export class GetListingImageService {
   public getAllListingImages(imageHref:string):Observable<ListingImageResponse[]>{
     return this.httpClient.get<ListingImageResponse[]>(imageHref);
   }
+
+  public addListingImage(imageHref:string, formdata:FormData):Observable<any>{
+    return this.httpClient.post(imageHref, formdata);
+  }
 }

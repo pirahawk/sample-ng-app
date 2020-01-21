@@ -3,6 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AgentPortal.Domain.Configuration;
 using AgentPortal.Domain.Store;
+using AgentPortal.Domain.Values;
 using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
 using Microsoft.Extensions.Options;
@@ -52,6 +53,20 @@ namespace AgentPortal.ImageStore
             }
 
             return isNewlyCreated;
+        }
+
+        public async Task<string> PersistArticleEntryMedia(string imageFileName, byte[] mediaContent, string contentType)
+        {
+            if (mediaContent == null) throw new ArgumentNullException(nameof(mediaContent));
+            if (string.IsNullOrWhiteSpace(contentType)) throw new ArgumentNullException(nameof(contentType));
+
+            var entryMediaBlobContainer = GetCloudBlobContainer(ImageStoreValueObject.BLOB_IMAGE_CONTAINER_NAME);
+            //var entryContentBlobDirectory = entryMediaBlobContainer.GetDirectoryReference($"{entryContentId}");
+            var entryMediaBlob = entryMediaBlobContainer.GetBlockBlobReference($"{imageFileName}");
+            entryMediaBlob.Properties.ContentType = contentType;
+            await entryMediaBlob.UploadFromByteArrayAsync(mediaContent, 0, mediaContent.Length);
+
+            return entryMediaBlob.Uri.AbsoluteUri;
         }
 
         private CloudBlobContainer GetCloudBlobContainer(string container)

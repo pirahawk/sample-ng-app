@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace AgentPortal
 {
@@ -28,6 +29,12 @@ namespace AgentPortal
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<ImageBlobStoreConfiguration>(Configuration.GetSection("ImageBlobStoreConfiguration"));
+
+            services.Configure<FormOptions>(options =>
+            {
+                // Set the file upload limit to 256 MB
+                options.MultipartBodyLengthLimit = 268435456;
+            });
 
             services.AddTransient<IStartupFilter, DbContextConfigurationStartupFilter>();
             services.AddTransient<IStartupFilter, ImageStoreStartupFilter>();
@@ -48,6 +55,7 @@ namespace AgentPortal
             services.AddTransient<IGetAllImagesCoordinator, GetAllImagesCoordinator>();
             services.AddTransient<IEditListingCoordinator, EditListingCoordinator>();
             services.AddTransient<ICreateListingCoordinator, CreateListingCoordinator>();
+            services.AddTransient<IAddImagesCoordinator, AddImagesCoordinator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

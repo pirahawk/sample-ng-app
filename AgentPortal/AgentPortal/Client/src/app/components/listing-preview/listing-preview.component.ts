@@ -65,5 +65,4 @@ export class ListingPreviewComponent implements OnInit {
 
     this.router.navigate(["edit", this.listing.id], {state:stateArg});
   }
-
 }

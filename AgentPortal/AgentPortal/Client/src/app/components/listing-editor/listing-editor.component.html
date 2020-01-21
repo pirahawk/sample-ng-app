@@ -59,5 +59,6 @@
     <section>
         <button [disabled]="!canSubmit()" (click)="submitListing($event)">Submit</button>
         <button (click)="navigateBack($event)">Cancel</button>
+        <button *ngIf="listing" (click)="uploadImage($event)">Upload-image</button>
     </section>
 </fieldset>

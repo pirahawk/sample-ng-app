@@ -6,6 +6,7 @@ import { GetListingsService } from 'src/app/services/get-listings.service';
 import { ListingResponse } from 'src/app/domain/http/listingResponse';
 import { HttpResponse } from '@angular/common/http';
 import { ResponseHelperService } from 'src/app/services/response-helper.service';
+import { GetListingImageService } from 'src/app/services/get-listing-image.service';
 
 @Component({
   selector: 'app-listing-editor',
@@ -23,6 +24,7 @@ export class ListingEditorComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private getListings: GetListingsService,
+    private getListingImageService: GetListingImageService,
     private responseHelper: ResponseHelperService) {
 
     const navigation: Navigation = this.router.getCurrentNavigation();
@@ -30,7 +32,7 @@ export class ListingEditorComponent implements OnInit {
     if(!navigation || !navigation.extras || !navigation.extras.state){
       return;
     }
-    
+
     const state: any = navigation.extras.state;
     this.listing = state.listing;
   }
@@ -104,5 +106,35 @@ export class ListingEditorComponent implements OnInit {
     };
 
     this.router.navigate(["listing", this.listing.id], {state:stateArg});
+  }
+
+  public uploadImage(event:any):void{
+    let input: HTMLInputElement = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/jpeg';
+    
+    input.addEventListener('change', (event:Event)=>{
+      
+      let target:HTMLInputElement = event.target as HTMLInputElement;
+      
+      if(target.files){
+        let uploadImg:File = target.files[0];
+        let formData = new FormData();
+        formData.append('file', uploadImg);
+        let imageHref:string =  this.responseHelper.getImageHref(this.listing);
+
+        this.getListingImageService.addListingImage(imageHref, formData)
+        .subscribe(
+          (state:any)=>{
+            let test = 1;
+          },
+          (error:any)=>{
+            let test = 1;
+          },
+        );
+      }
+    });
+    input.click();
+    
   }
 }
