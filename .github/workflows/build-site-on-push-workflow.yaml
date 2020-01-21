@@ -24,11 +24,11 @@ jobs:
     - name: print-directory 
       run: ls -la
 
-    # - name: npm-install
-    #   run: npm install --prefix ./AgentPortal/AgentPortal/Client
+    - name: npm-install
+      run: npm install --prefix ./AgentPortal/AgentPortal/Client
 
-    # - name: npm-build
-    #   run: npm run --prefix ./AgentPortal/AgentPortal/Client build
+    - name: npm-build
+      run: npm run --prefix ./AgentPortal/AgentPortal/Client build
 
     # - name: build-dotnet
     #   run: dotnet build AgentPortal/AgentPortal.sln --nologo
