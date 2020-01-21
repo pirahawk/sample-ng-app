@@ -60,8 +60,7 @@ export class ListingPreviewComponent implements OnInit {
 
   public editListing(event:any):void{
     let stateArg:any = {
-      listingHref: this.responseHelper.getSelfHref(this.listing),
-      imageHref: this.responseHelper.getImageHref(this.listing)
+      listing: this.listing
     };
 
     this.router.navigate(["edit", this.listing.id], {state:stateArg});
