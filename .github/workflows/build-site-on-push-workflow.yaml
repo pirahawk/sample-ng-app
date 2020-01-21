@@ -1,0 +1,37 @@
+name: Agent Portal Build
+on: [push]
+
+jobs:
+  build_nuget:
+    name: Build Node App
+    runs-on: ubuntu-latest
+    steps:
+    - name: setup-node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+       
+    - name: setup-dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1.100'
+      
+    - name: checkout-repo
+      uses: actions/checkout@v2
+      with:
+        clean: 'true'
+
+    - name: print-directory 
+      run: ls -la
+
+    - name: npm-install
+      run: npm install --prefix ./AgentPortal/AgentPortal/Client
+
+    - name: npm-build
+      run: npm run --prefix ./AgentPortal/AgentPortal/Client build
+
+    - name: build-dotnet
+      run: dotnet build AgentPortal/AgentPortal.sln --nologo
+
+    - name: run-test
+      run: dotnet test AgentPortal/AgentPortal.sln --nologo
