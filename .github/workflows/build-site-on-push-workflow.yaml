@@ -33,7 +33,7 @@ jobs:
     - name: build-dotnet-server
       run: dotnet build AgentPortal/AgentPortal.sln --nologo
 
-  build_nuget:
+  run_tests:
     name: Run Tests
     runs-on: ubuntu-latest
     steps:     
