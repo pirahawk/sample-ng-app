@@ -19,7 +19,11 @@ namespace AgentPortal.Domain.Tests.Coordinators
 
             var mockContext = new Mock<IPortalDbContext>();
             mockContext.Setup(m => m.Find<Listing>(listing1.Id))
-                .Returns(async () => listing1)
+                .Returns(async () =>
+                {
+                    await Task.CompletedTask;
+                    return listing1;
+                })
                 .Verifiable();
 
             var coordinator = new FindListingCoordinator(mockContext.Object);
@@ -37,7 +41,11 @@ namespace AgentPortal.Domain.Tests.Coordinators
 
             var mockContextThatReturnsNoListings = new Mock<IPortalDbContext>();
             mockContextThatReturnsNoListings.Setup(m => m.Find<Listing>(It.IsAny<Guid>()))
-                .Returns(async () => null)
+                .Returns(async () =>
+                {
+                    await Task.CompletedTask;
+                    return null;
+                })
                 .Verifiable();
 
             var coordinator = new FindListingCoordinator(mockContextThatReturnsNoListings.Object);
