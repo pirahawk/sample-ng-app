@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AgentPortal.Domain.Data;
+using AgentPortal.Domain.Http;
 
 namespace AgentPortal.Domain.Tests.Data
 {
@@ -21,9 +22,9 @@ namespace AgentPortal.Domain.Tests.Data
             Id = Guid.NewGuid();
             Description = "One Hyde Park, 100";
             Address = "100 Knightsbridge, London";
-            AskingPrice = 200000000m;
+            AskingPrice = 2000m;
             NumberBedrooms = 10;
-            PostCode = "SW1X 7LJ";
+            PostCode = "AA1 1AA";
             Images = Enumerable.Empty<ListingImage>();
         }
 
@@ -40,6 +41,19 @@ namespace AgentPortal.Domain.Tests.Data
                 Expired = Expired,
                 Images = Images
 
+            };
+        }
+
+        public EditListingRequest AsRequest()
+        {
+            return new EditListingRequest
+            {
+                Address = Address,
+                AskingPrice = AskingPrice,
+                Description = Description,
+                Expired = Expired,
+                NumberBedrooms = NumberBedrooms,
+                PostCode = PostCode
             };
         }
     }

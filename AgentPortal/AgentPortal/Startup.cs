@@ -42,10 +42,12 @@ namespace AgentPortal
             services.AddTransient<IImageStore, AzureBlobImageStore>();
             services.AddTransient<IPortalDbContext, AgentPortalPortalDbContextAdapter>();
 
+            services.AddSingleton<IListingValidatorHelper, ListingValidatorHelper>();
             services.AddTransient<IGetAllListingsCoordinator, GetAllListingsCoordinator>();
             services.AddTransient<IFindListingCoordinator, FindListingCoordinator>();
             services.AddTransient<IGetAllImagesCoordinator, GetAllImagesCoordinator>();
             services.AddTransient<IEditListingCoordinator, EditListingCoordinator>();
+            services.AddTransient<ICreateListingCoordinator, CreateListingCoordinator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

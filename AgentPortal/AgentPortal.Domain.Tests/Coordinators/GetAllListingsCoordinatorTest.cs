@@ -4,7 +4,6 @@ using AgentPortal.Domain.Tests.Data;
 using Moq;
 using System.Linq;
 using AgentPortal.Domain.Coordinators;
-using AgentPortal.Domain.Http;
 using Xunit;
 
 namespace AgentPortal.Domain.Tests.Coordinators
@@ -52,39 +51,6 @@ namespace AgentPortal.Domain.Tests.Coordinators
             mockContext.VerifyAll();
             Assert.Contains(listing1, result);
             Assert.DoesNotContain(expiredListing,result);
-        }
-    }
-
-    public class EditListingCoordinatorTest
-    {
-        [Fact]
-        public void AppliesEditsAndSavesExistingListing()
-        {
-            var existingListing = new ListingFixture().Build();
-            var editRequest = new EditListingRequest
-            {
-                Address = existingListing + "edit",
-                AskingPrice = existingListing.AskingPrice + 10m,
-                Description = existingListing.Description + "edit",
-                Expired = true,
-                NumberBedrooms = existingListing.NumberBedrooms + 1,
-                PostCode = existingListing.PostCode + "edit"
-            };
-
-            var mockContext = new Mock<IPortalDbContext>();
-            mockContext.Setup(m => m.Attach(existingListing)).Verifiable();
-            mockContext.Setup(m=> m.SaveChanges()).Verifiable();
-
-            var coordinator = new EditListingCoordinator(mockContext.Object);
-            coordinator.Edit(existingListing.Id, existingListing, editRequest);
-
-            mockContext.VerifyAll();
-            Assert.Equal(editRequest.Address, existingListing.Address);
-            Assert.Equal(editRequest.AskingPrice, existingListing.AskingPrice);
-            Assert.Equal(editRequest.Description, existingListing.Description);
-            Assert.Equal(editRequest.Expired, existingListing.Expired);
-            Assert.Equal(editRequest.NumberBedrooms, existingListing.NumberBedrooms);
-            Assert.Equal(editRequest.PostCode, existingListing.PostCode);
         }
     }
 }

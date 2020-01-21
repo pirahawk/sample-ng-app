@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AgentPortal.Domain.Db;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,16 @@ namespace AgentPortal.Db
         public async Task<TEntity> Find<TEntity>(params object[] keyValues) where TEntity : class
         {
             return await _portalDbContext.FindAsync<TEntity>(keyValues);
+        }
+
+        public async Task Add<TEntity>(params TEntity[] newEntities)
+        {
+            if (newEntities == null) throw new ArgumentNullException(nameof(newEntities));
+
+            foreach (var newEntity in newEntities)
+            {
+                await _portalDbContext.AddAsync(newEntity);
+            }
         }
 
         public void Attach<TEntity>(TEntity entity)

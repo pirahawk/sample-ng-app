@@ -16,20 +16,45 @@ namespace AgentPortal.Controllers.Api
         private readonly IGetAllListingsCoordinator _getListingsCoordinator;
         private readonly IFindListingCoordinator _findListingCoordinator;
         private readonly IEditListingCoordinator _editListingCoordinator;
+        private readonly ICreateListingCoordinator _createListingCoordinator;
 
         public ListingsController(IGetAllListingsCoordinator getListingsCoordinator,
-            IFindListingCoordinator findListingCoordinator, IEditListingCoordinator editListingCoordinator)
+            IFindListingCoordinator findListingCoordinator, 
+            IEditListingCoordinator editListingCoordinator,
+            ICreateListingCoordinator createListingCoordinator)
         {
             _getListingsCoordinator = getListingsCoordinator;
             _findListingCoordinator = findListingCoordinator;
             _editListingCoordinator = editListingCoordinator;
+            _createListingCoordinator = createListingCoordinator;
         }
 
+        [Route("")]
         [HttpGet]
         public IActionResult GetListings()
         {
             var allListings = _getListingsCoordinator.GetAllListings();
             var response = allListings.AsEnumerable().Select(MapListingResponse);
+            return Ok(response);
+        }
+
+        [Route("")]
+        [HttpPost]
+        public async Task<IActionResult> AddNewListing(EditListingRequest newListingRequest)
+        {
+            if (newListingRequest == null)
+            {
+                return BadRequest();
+            }
+
+            var newListing = await _createListingCoordinator.Create(newListingRequest);
+
+            if (newListing == null)
+            {
+                return BadRequest();
+            }
+
+            var response = MapListingResponse(newListing);
             return Ok(response);
         }
 
@@ -59,7 +84,12 @@ namespace AgentPortal.Controllers.Api
                 return NotFound();
             }
 
-            _editListingCoordinator.Edit(listingId, existingListing, editListingRequest);
+            var result = await _editListingCoordinator.Edit(listingId, existingListing, editListingRequest);
+
+            if (result == null)
+            {
+                return BadRequest();
+            }
 
             return NoContent();
         }
