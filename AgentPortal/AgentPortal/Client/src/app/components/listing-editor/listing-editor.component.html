@@ -62,3 +62,12 @@
         <button *ngIf="listing" (click)="uploadImage($event)">Upload-image</button>
     </section>
 </fieldset>
+
+<ng-container *ngIf="images">
+    <div class="image-preview">
+        <section>
+            <img *ngFor="let image of images" [src]="image.url" />
+            <a (click)="deleteImage($event, image)">delete</a>
+        </section>
+    </div>
+</ng-container>

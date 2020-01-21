@@ -7,6 +7,7 @@ import { ListingResponse } from 'src/app/domain/http/listingResponse';
 import { HttpResponse } from '@angular/common/http';
 import { ResponseHelperService } from 'src/app/services/response-helper.service';
 import { GetListingImageService } from 'src/app/services/get-listing-image.service';
+import { ListingImageResponse } from 'src/app/domain/http/listingImageResponse';
 
 @Component({
   selector: 'app-listing-editor',
@@ -14,6 +15,7 @@ import { GetListingImageService } from 'src/app/services/get-listing-image.servi
 })
 export class ListingEditorComponent implements OnInit {
   public listing: ListingResponse;
+  public images:ListingImageResponse[];
 
   public numberRoomsControl: FormControl;
   public postcodeControl: FormControl;
@@ -51,6 +53,8 @@ export class ListingEditorComponent implements OnInit {
       Validators.compose([Validators.required,
       Validators.min(1),
       Validators.pattern(/^\d+$/)]));
+      
+      this.refreshImageList();
   }
 
   public canSubmit(): boolean {
@@ -126,15 +130,30 @@ export class ListingEditorComponent implements OnInit {
         this.getListingImageService.addListingImage(imageHref, formData)
         .subscribe(
           (state:any)=>{
-            let test = 1;
+            this.refreshImageList();
           },
-          (error:any)=>{
-            let test = 1;
-          },
+          (error:any)=>{},
         );
       }
     });
+
     input.click();
-    
+  }
+
+  public deleteImage(event:Event, image: ListingImageResponse): void {
+    //TODO
+  }
+
+  private refreshImageList():void {
+    if(!this.listing){
+      return;
+    }
+
+    let imageHref:string =  this.responseHelper.getImageHref(this.listing);
+    this.getListingImageService.getAllListingImages(imageHref)
+    .subscribe(
+      (response:ListingImageResponse[]) => this.images = response,
+      (error:any)=>{}
+    );
   }
 }
