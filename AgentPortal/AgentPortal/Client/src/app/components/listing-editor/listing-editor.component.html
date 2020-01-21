@@ -65,8 +65,8 @@
 
 <ng-container *ngIf="images">
     <div class="image-preview">
-        <section>
-            <img *ngFor="let image of images" [src]="image.url" />
+        <section *ngFor="let image of images">
+            <img [src]="image.url" />
             <a (click)="deleteImage($event, image)">delete</a>
         </section>
     </div>
