@@ -87,16 +87,17 @@ You may run all unit tests in the solution like so:
 ```
 
 
-## Some key decisions made during this build
+## Key decisions made during this build
 
-* The primary technologies used, dotnetcore and nodejs have 100% cross platform support to allow containerizing the solution.
-* I took the liberty of experimenting with github actions and compiled a small build pipeline, located at the path `.github/workflows/build-site-on-push-workflow.yaml` to demonstrate my project setup is CLI ready. You can browse my previous build attempts from the `actions` tab on the github repo.
+* The primary technologies used, dotnetcore and nodejs all have cross platform compatibility support to allow containerizing the solution.
+* I took the liberty of experimenting with github actions and compiled a small build pipeline, located at the path `.github/workflows/build-site-on-push-workflow.yaml` to demonstrate my project setup is CLI ready. I split it into two build-jobs so that the app build and the unit tests can run in parallel to save on build time. You can browse my previous build attempts from the `actions` tab on the github repo.
 * From an Architectural standpoint, I have aimed to isolate platform level dependencies within the solution into their own projects. Note that both the Entity framework DB provider and the azure SDK are hosted within their own projects and exposed either via the lens of an interface or using an adapter. This prevents adjacent assemblies from needing to maintain a reference to their SDK's hence allowing swapping to an alternate tech in the future.
 * All dependencies are registered and injected by the asp `WebHostBuilder`. I extensively use constructor based DI as I find this excellent at decoupling dependencies and also facilitates unit testing.
 * This was actually the first time I used the entity-framework in memory DB provider. In lieu of it not supporting referential table integrity, please do not be alarmed at the way I have implemented some of my validation checks on entities, I would normally depend on the schema definitions to do this for me when using a full SQL DB solution.
 * I use `Moq` and `XUnit` as my testing platforms. I have tried to maintain test coverage of all my logic and DAL layers.
 * I like to seperate my REST request/response types from directly using DAL entity types. This allows augmenting the REST types to suppert hypermedia links and allows both areas to be managed independantly. Also note that by being housed within the `AgentPortal.Domain` project, a library that contains all my core types with no external dependencies, makes it easy to publish this library and distribute it as nuget pacakge. This way Clients I write can consume the REST response/request packets making serializing/de-serializing much easier.
 * I feel with the way I have laid out the application, should make it pretty easy to split the code into a client, server and static-content server project in the future. This allows each area to grow and be managed independantly by different teams.
+* I like to group and compile all my sass files from one entry point VS going with the angular default of having each component refernce a .scss file. I have a couple of reasons for this, one being I am a huge fan of the [SMACSS](http://smacss.com/book/categorizing) methodology when it comes to styling. The other being, in a real-world scenario I usually like to be able to inject a device-specific css style-sheet to cater for a better experience, but again this is one of many approaches.
 
 
 Thanks again for the exercise, it was a lot of fun :)
