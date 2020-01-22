@@ -7,6 +7,7 @@ I used the following parts to build this project:
 * An [entity-framework in-memory databse provider](https://docs.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli) which serves as the data-store. This is to aide with being able to distribute and 
 * Azure blob storage - used as the image store.
 
+Project Build status: ![](https://github.com/zoopla/Piran.Tata/workflows/Agent%20Portal%20Build/badge.svg)
 
 *Some things to note:*
 * The in-memory database provider does not persist data, hence all entries will be lost when the app finishes execution.
