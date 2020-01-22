@@ -3,7 +3,13 @@ nav{
         display: flex;
         flex-direction: row;
         justify-content: center;
+        align-items: center;
     a{
-        margin: 5px;
+        margin: 0 15px 0 15px;
+        padding-bottom: 5px;
+
+        &.active{
+            border-bottom: 2px solid $midnight;
+        }
     }
 }

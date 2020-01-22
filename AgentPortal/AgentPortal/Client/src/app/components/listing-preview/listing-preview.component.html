@@ -1,32 +1,36 @@
 <ng-container *ngIf="listing">
     <h1>{{ listing.description }}</h1>
 
-    <section>
-        <h2>Location</h2>
-        <address>
-            <p>{{listing.address}}</p>
-            <p>{{listing.postCode}}</p>
-        </address>
-    </section>
+    <div>
+        <section>
+            <label>Location</label>
+            <address>
+                <p>{{listing.address}}</p>
+                <p>{{listing.postCode}}</p>
+            </address>
+        </section>
 
-    <section>
-        <h2>Number of Bedrooms</h2>
-        <p>{{listing.numberBedrooms}}</p>
-    </section>
+        <section>
+            <label>Bedrooms</label>
+            <span>{{listing.numberBedrooms}}</span>
+        </section>
 
-    <section>
-        <h2>Asking Price</h2>
-        <p>{{listing.askingPrice}}</p>
-    </section>
+        <section>
+            <label>Price</label>
+            <span>{{listing.askingPrice | currency:'GBP':true}}</span>
+        </section>
 
-    <section>
-        <button (click)="expireListing($event)">Expire</button>
-        <button (click)="editListing($event)">Edit</button>
-    </section>
+        <section>
+            <button class="go" (click)="editListing($event)">Edit</button>
+            <button class="danger" (click)="expireListing($event)">Expire</button>
+        </section>
+    </div>
+
+    <h2>Images</h2>
 
     <ng-container *ngIf="images">
         <div class="image-preview">
-            <img *ngFor="let image of images" [src]="image.url" />
+            <img *ngFor="let image of images" [src]="image.url" alt="preview image for {{listing.description}}"/>
         </div>
     </ng-container>
 

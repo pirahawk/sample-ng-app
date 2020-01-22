@@ -5,11 +5,18 @@
 <p *ngIf="!isRetrievingListings && !listings">No property listings available.</p>
 
 <div *ngIf="!isRetrievingListings && listings">
+    <section class="headers">
+        <span>Description</span>
+        <span>Post Code</span>
+        <span>Bedrooms</span>
+        <span>Price</span>
+        <span></span>
+    </section>
     <section class="listing" *ngFor="let listing of listings" (click)="navigateListing($event, listing)">
         <span>{{ listing.description }}</span>
         <span>{{ listing.postCode }}</span>
         <span>{{ listing.numberBedrooms }}</span>
-        <span>{{ listing.askingPrice }}</span>
+        <span>{{ listing.askingPrice |currency:'GBP':true }}</span>
         <app-listing-image-preview [imageHref]="getImageHref(listing)"></app-listing-image-preview>
     </section>
 </div>

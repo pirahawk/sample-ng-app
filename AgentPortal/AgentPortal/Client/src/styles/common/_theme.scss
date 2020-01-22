@@ -1,0 +1,53 @@
+button{
+    border-color: $azure;
+    background-color: $azure;
+    color: $white;
+
+    &.go{
+        border-color: $medium-sea-green;
+        background-color: $medium-sea-green;
+    }
+
+    &.danger{
+        border-color: $boston-university-red;
+        background-color: $boston-university-red;
+    }
+}
+
+fieldset{
+    border: none;
+}
+
+nav{
+    background-color: $dark-tangerine;
+    
+    a{
+        color: $midnight;
+    }
+}
+
+app-listings{
+    section{
+        background-color: $tea-green;
+
+        &:nth-of-type(2n){
+            background-color: $buff;
+        }
+
+        &:hover{
+            background-color: $dark-salmon;
+            cursor:pointer;
+        }
+
+        &:first-of-type, &:first-of-type:hover{
+            color: $white;
+            background-color: $light-sea-green;
+        }
+    }
+}
+
+app-listing-editor{
+    span.validation{
+        color: $boston-university-red
+    }
+}

@@ -1,4 +1,37 @@
 app-listing-preview{
+
+    div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        section{
+            width:300px;
+             display: flex;
+             flex-direction: row;
+             justify-content: left;
+
+            address{
+                p:first-of-type{
+                 margin-top: 0;   
+                }
+            }
+
+            &+section{
+                margin-top: 20px;
+            }
+
+            &:last-of-type{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        
+    }
+ 
     .image-preview{
         display: flex;
         flex-direction: row;
