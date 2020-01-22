@@ -94,7 +94,7 @@ namespace AgentPortal.Configuration.Filters
             dbContext.Images.Add(listingImage3);
             dbContext.SaveChanges();
 
-            BulkLoadData(dbContext, listingImage1);
+            //BulkLoadData(dbContext, listingImage1);
 
         }
 
